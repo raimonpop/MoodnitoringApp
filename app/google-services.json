@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "664077988892",
+    "project_id": "moodnitoringapp-75987",
+    "storage_bucket": "moodnitoringapp-75987.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:664077988892:android:f8ad420980adc36a865bd9",
+        "android_client_info": {
+          "package_name": "raimon.example.moodnitoringapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "664077988892-1126v6c7ean2ehs5ajri8fg3qm31qcd8.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC6bVq10RsQ_oSCmwSlma9EWPgEgMnMAUk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "664077988892-1126v6c7ean2ehs5ajri8fg3qm31qcd8.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
