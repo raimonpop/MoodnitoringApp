@@ -10,6 +10,8 @@ dependencyResolutionManagement {
     repositories {
         google()
         mavenCentral()
+        // Añadido repositorio para MPAndroidChart
+        maven {url 'https://jitpack.io'}
     }
 }
 rootProject.name = "MoodnitoringApp"

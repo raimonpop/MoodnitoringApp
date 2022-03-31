@@ -30,9 +30,14 @@ android {
     kotlinOptions {
         jvmTarget = '1.8'
     }
+    viewBinding {
+        enabled = true
+    }
 }
 
 dependencies {
+    implementation 'com.google.firebase:firebase-firestore:24.1.0'
+    def nav_version = "2.4.1"
 
     implementation 'androidx.core:core-ktx:1.7.0'
     implementation 'androidx.appcompat:appcompat:1.4.1'
@@ -43,6 +48,10 @@ dependencies {
     androidTestImplementation 'androidx.test.ext:junit:1.1.3'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
 
+    //
+    implementation("androidx.navigation:navigation-fragment-ktx:$nav_version")
+    implementation("androidx.navigation:navigation-ui-ktx:$nav_version")
+
     // FirebaseUI for Firebase Auth
     implementation 'com.firebaseui:firebase-ui-auth:8.0.0'
     implementation 'com.google.firebase:firebase-auth-ktx:21.0.1'
@@ -52,4 +61,8 @@ dependencies {
 
     //FIrebase Firestore
     implementation 'com.google.firebase:firebase-firestore-ktx:24.0.1'
+
+    // Task CLG - Implementar visualización de datos
+    // Charts, ver: https://stackoverflow.com/questions/69163511/build-was-configured-to-prefer-settings-repositories-over-project-repositories-b
+    implementation 'com.github.PhilJay:MPAndroidChart:v3.0.3'
 }
