@@ -1,4 +1,4 @@
-package raimon.example.moodnitoringapp.registroDatos
+package raimon.example.moodnitoringapp.ui.registroDatos
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
