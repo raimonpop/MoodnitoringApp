@@ -10,6 +10,7 @@ dependencyResolutionManagement {
     repositories {
         google()
         mavenCentral()
+        jcenter() // No lo borres, que deja de tirar el Anko
         // Añadido repositorio para MPAndroidChart
         maven {url 'https://jitpack.io'}
     }

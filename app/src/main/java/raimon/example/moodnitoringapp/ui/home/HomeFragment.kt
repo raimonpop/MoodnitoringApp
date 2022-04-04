@@ -8,8 +8,9 @@ import android.view.ViewGroup
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import raimon.example.moodnitoringapp.R
+import raimon.example.moodnitoringapp.dao.FirestoreDAONC
 import raimon.example.moodnitoringapp.databinding.FragmentHomeBinding
-
+import raimon.example.moodnitoringapp.model.Registro
 
 class HomeFragment : Fragment() {
 
@@ -54,7 +55,6 @@ class HomeFragment : Fragment() {
         }
 
     }
-
 
     override fun onDestroyView() {
         super.onDestroyView()
