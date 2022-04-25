@@ -25,7 +25,7 @@
     </fragment>
     <fragment
         android:id="@+id/nav_registroFragment"
-        android:name="raimon.example.moodnitoringapp.ui.registroDatos.view.RegistroFragment"
+        android:name="raimon.example.moodnitoringapp.ui.registroDatos.RegistroFragment"
         android:label="fragment_registro"
         tools:layout="@layout/fragment_registro" />
     <fragment
@@ -40,7 +40,7 @@
         tools:layout="@layout/fragment_actuacion" />
     <fragment
         android:id="@+id/nav_visualizacionFragment"
-        android:name="raimon.example.moodnitoringapp.UI.visualizacion.VisualizacionFragment"
+        android:name="raimon.example.moodnitoringapp.ui.visualizacion.VisualizacionFragment"
         android:label="VisualizacionFragment" />
     <!--    <fragment-->
 <!--        android:id="@+id/nav_visualizacionFragment"-->
