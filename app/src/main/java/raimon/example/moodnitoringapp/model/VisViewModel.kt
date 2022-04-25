@@ -1,20 +1,11 @@
 package raimon.example.moodnitoringapp.model
 
-import android.content.Context
 import android.util.Log
-import androidx.lifecycle.LiveData
-
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.github.mikephil.charting.data.LineData
-import com.github.mikephil.charting.interfaces.datasets.ILineDataSet
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
-import org.jetbrains.anko.doAsync
-import org.jetbrains.anko.uiThread
-import raimon.example.moodnitoringapp.R
 import java.time.LocalDate
-import java.util.ArrayList
 
 class VisViewModel: ViewModel() {
 
