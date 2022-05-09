@@ -3,6 +3,7 @@ package raimon.example.moodnitoringapp.model
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import java.util.*
@@ -56,17 +57,19 @@ class RegViewModel: ViewModel() {
     fun insertReg(reg: Registro){
         Log.i(TAG, "Insertando ${reg}..")
 
+        val auth = FirebaseAuth.getInstance()
+
         // generate random ID for document
-        val id = UUID.randomUUID().toString()
-
-        db.collection("Registros").document(id)
-            .set(reg)
-            .addOnSuccessListener {
-                Log.i(TAG, "Registro $reg añadido correctamente")
+        val id = auth.currentUser?.uid.let {
+            db.collection("Registros").document(it.toString())
+                .set(reg)
+                .addOnSuccessListener {
+                    Log.i(TAG, "Registro $reg añadido correctamente")
+                }
+                .addOnFailureListener { ex ->
+                    Log.i(TAG, "Error: ${ex.message}")
+                }
             }
-            .addOnFailureListener { ex ->
-                Log.i(TAG, "Error: ${ex.message}")
-            }
 
-    }
+        }
 }

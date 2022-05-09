@@ -10,11 +10,13 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
+import com.google.firebase.Timestamp
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 import raimon.example.moodnitoringapp.databinding.FragmentRegistroBinding
 import raimon.example.moodnitoringapp.model.RegViewModel
 import raimon.example.moodnitoringapp.model.Registro
+import java.time.LocalDate
 import java.time.LocalDateTime
 
 
@@ -103,12 +105,14 @@ class RegistroFragment : Fragment() {
         binding.sbEstadoAnimo.max = 10
         binding.sbEstadoAnimo.progress = 5
 
-        binding.sbEstadoAnimo.setOnSeekBarChangeListener(object :OnSeekBarChangeListener {
+        binding.sbEstadoAnimo.setOnSeekBarChangeListener(object : OnSeekBarChangeListener {
 
             var curProgress: Int = 0
 
-            override fun onProgressChanged(seek: SeekBar,
-                                           progress: Int, fromUser: Boolean) {
+            override fun onProgressChanged(
+                seek: SeekBar,
+                progress: Int, fromUser: Boolean
+            ) {
                 // write custom code for progress is changed
                 // Actualizamos el atributo de clase
                 curProgress = progress
@@ -135,12 +139,14 @@ class RegistroFragment : Fragment() {
         binding.sbHorasSon.max = 24
         binding.sbHorasSon.progress = 8
 
-        binding.sbHorasSon.setOnSeekBarChangeListener(object :OnSeekBarChangeListener {
+        binding.sbHorasSon.setOnSeekBarChangeListener(object : OnSeekBarChangeListener {
 
             var curProgress: Int = 0
 
-            override fun onProgressChanged(seek: SeekBar,
-                                           progress: Int, fromUser: Boolean) {
+            override fun onProgressChanged(
+                seek: SeekBar,
+                progress: Int, fromUser: Boolean
+            ) {
                 // write custom code for progress is changed
                 // Actualizamos el atributo de clase
                 curProgress = progress
@@ -167,12 +173,14 @@ class RegistroFragment : Fragment() {
         binding.sbFisicas.max = 24
         binding.sbFisicas.progress = 3
 
-        binding.sbFisicas.setOnSeekBarChangeListener(object :OnSeekBarChangeListener {
+        binding.sbFisicas.setOnSeekBarChangeListener(object : OnSeekBarChangeListener {
 
             var curProgress: Int = 0
 
-            override fun onProgressChanged(seek: SeekBar,
-                                           progress: Int, fromUser: Boolean) {
+            override fun onProgressChanged(
+                seek: SeekBar,
+                progress: Int, fromUser: Boolean
+            ) {
                 // write custom code for progress is changed
                 // Actualizamos el atributo de clase
                 curProgress = progress
@@ -199,12 +207,14 @@ class RegistroFragment : Fragment() {
         binding.sbIntelectual.max = 24
         binding.sbIntelectual.progress = 2
 
-        binding.sbIntelectual.setOnSeekBarChangeListener(object :OnSeekBarChangeListener {
+        binding.sbIntelectual.setOnSeekBarChangeListener(object : OnSeekBarChangeListener {
 
             var curProgress: Int = 0
 
-            override fun onProgressChanged(seek: SeekBar,
-                                           progress: Int, fromUser: Boolean) {
+            override fun onProgressChanged(
+                seek: SeekBar,
+                progress: Int, fromUser: Boolean
+            ) {
                 // write custom code for progress is changed
                 // Actualizamos el atributo de clase
                 curProgress = progress
@@ -231,12 +241,14 @@ class RegistroFragment : Fragment() {
         binding.sbSocial.max = 24
         binding.sbSocial.progress = 2
 
-        binding.sbSocial.setOnSeekBarChangeListener(object :OnSeekBarChangeListener {
+        binding.sbSocial.setOnSeekBarChangeListener(object : OnSeekBarChangeListener {
 
             var curProgress: Int = 0
 
-            override fun onProgressChanged(seek: SeekBar,
-                                           progress: Int, fromUser: Boolean) {
+            override fun onProgressChanged(
+                seek: SeekBar,
+                progress: Int, fromUser: Boolean
+            ) {
                 // write custom code for progress is changed
                 // Actualizamos el atributo de clase
                 curProgress = progress
@@ -262,37 +274,42 @@ class RegistroFragment : Fragment() {
         //region Botones
         binding.btSave.setOnClickListener {
             // Si no hay nadie logado, abortamos misión.
-            if ( currentUser == null) return@setOnClickListener
+            if (currentUser == null) return@setOnClickListener
 
-            val mail = currentUser!!.email
-            val YYYY = LocalDateTime.now().year
-            val MM = LocalDateTime.now().monthValue
-            val DD = LocalDateTime.now().dayOfMonth
+            //val YYYY = LocalDateTime.now().year
+            //val MM = LocalDateTime.now().monthValue
+            //val DD = LocalDateTime.now().dayOfMonth
             val ea = binding.tvCurEstadoAnimo.text.toString().toInt()
             val hs = binding.tvCurHorasSon.text.toString().toInt()
             var ha = 0
             if (binding.cbFisicas.isChecked) ha += binding.tvCurFisicas.text.toString().toInt()
-            if (binding.cbIntelectual.isChecked) ha += binding.tvCurIntelectual.text.toString().toInt()
+            if (binding.cbIntelectual.isChecked) ha += binding.tvCurIntelectual.text.toString()
+                .toInt()
             if (binding.cbSocial.isChecked) ha += binding.tvCurSociales.text.toString().toInt()
 
             // Solo vamos a registrar datos consistentes horas < 24
-            if (hs+ha > 24){
+            if (hs + ha > 24) {
 //                Log.i(TAG, "error captured")
-                Toast.makeText(activity, "Entre las horas de sueño y las actividades sobrepasas 24h..", Toast.LENGTH_LONG).show()
+                Toast.makeText(
+                    activity,
+                    "Entre las horas de sueño y las actividades sobrepasas 24h..",
+                    Toast.LENGTH_LONG
+                ).show()
                 return@setOnClickListener
-            }else{
-                val reg1 = Registro(
-                    usuario = "$mail"
-//                , fecha = LocalDate.now().toString() //"2022.01.02" // LocalDate.now().toString()
-                    , yyyy = YYYY
-                    , mm = MM
-                    , dd = DD
-                    , estAnim = ea
-                    , horasSon = hs
-                    , horasAct = ha
+            } else {
+                val reg = Registro(
+                    usuario = auth.currentUser?.uid.toString(),
+                    fecha = Timestamp.now() //"2022.01.02" // LocalDate.now().toString()
+                    //, yyyy = YYYY
+                    //, mm = MM
+                    // , dd = DD
+                    ,
+                    estAnim = ea,
+                    horasSon = hs,
+                    horasAct = ha
                 )
 //              FirestoreDAONC.addRegister(reg1)
-                viewModel.insertReg(reg1)
+                viewModel.insertReg(reg)
             }
         }
         //endregion
