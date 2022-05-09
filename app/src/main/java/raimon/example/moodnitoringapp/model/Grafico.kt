@@ -86,7 +86,7 @@ data class Grafico (
             }
             lineDataSet_hs = LineDataSet(ejeY_hs,eti2)
             lineDataSet_hs.color = colorLineVar2 // resources.getColor(R.color.purple_500) // Color de la linea
-            lineDataSet_hs.circleRadius = 0f // Quita los círculos
+            lineDataSet_hs.circleRadius = 1f // Quita los círculos
             lineDataSet_hs.setDrawFilled(true) // Rellena
             lineDataSet_hs.fillColor = colorFillVar2//resources.getColor(R.color.purple_200) // Color de relleno
             lineDataSet_hs.fillAlpha = 30
@@ -115,7 +115,7 @@ data class Grafico (
             lineDataSet_act = LineDataSet(ejeY_act, eti3)
             lineDataSet_act.color =
                 colorLineVar3 // resources.getColor(R.color.purple_500) // Color de la linea
-            lineDataSet_act.circleRadius = 0f // Quita los círculos
+            lineDataSet_act.circleRadius = 1f // Quita los círculos
             lineDataSet_act.setDrawFilled(true) // Rellena
             lineDataSet_act.fillColor =
                 colorFillVar3//resources.getColor(R.color.purple_200) // Color de relleno
@@ -143,7 +143,7 @@ data class Grafico (
             }
             lineDataSet_ea = LineDataSet(ejeY_ea,eti1)
             lineDataSet_ea.color = colorLineVar1 // resources.getColor(R.color.purple_500) // Color de la linea
-            lineDataSet_ea.circleRadius = 0f // Quita los círculos
+            lineDataSet_ea.circleRadius = 1f // Quita los círculos
             lineDataSet_ea.setDrawFilled(true) // Rellena
             lineDataSet_ea.fillColor = colorFillVar1//resources.getColor(R.color.purple_200) // Color de relleno
             lineDataSet_ea.fillAlpha = 30

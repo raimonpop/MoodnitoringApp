@@ -10,6 +10,7 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import com.github.mikephil.charting.charts.LineChart
 import com.github.mikephil.charting.data.LineData
+import com.google.firebase.auth.FirebaseAuth
 import raimon.example.moodnitoringapp.R
 import raimon.example.moodnitoringapp.databinding.FragmentVisualizacionBinding
 import raimon.example.moodnitoringapp.model.Grafico
@@ -18,13 +19,14 @@ import raimon.example.moodnitoringapp.model.VisViewModel
 import java.util.ArrayList
 
 
-class VisualizacionFragment : Fragment(){
+class VisualizacionFragment : Fragment() {
 
-//    private lateinit var binding: FragmentVisualizacionBinding
+    //    private lateinit var binding: FragmentVisualizacionBinding
     private val TAG = "Log:VisFrag"
 
     // ViewBinding
     private var _binding: FragmentVisualizacionBinding? = null
+
     // This property is only valid between onCreateView and
     // onDestroyView.
     private val binding get() = _binding!!
@@ -34,8 +36,11 @@ class VisualizacionFragment : Fragment(){
 
     // LineCharts
     private lateinit var lineChart: LineChart
+
     // Dias
     private var curDays: Int = 0
+
+    private val auth = FirebaseAuth.getInstance()
 
 
     override fun onCreateView(
@@ -55,8 +60,6 @@ class VisualizacionFragment : Fragment(){
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val correo = "carlos@prueba.com" // auth.currentUser.mail
-
 
         /**
          * >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
@@ -65,19 +68,8 @@ class VisualizacionFragment : Fragment(){
         // Observer del LiveData
         val registrosObserver = Observer<ArrayList<Registro>> { registros ->
             // Update the UI with the new Data
-            /**
-             * Construimos la gráfica
-             * Ejemplo de uso:
-             *
-             * Grafico(...)
-             * createXAxis()
-             * CreateLineDataSetVar1()
-             * CreateLineDataSetVar2()
-             * CreateLineDataSetVar3()
-             * mergeDataSets()
-             * getLineData()
-             */
-            val grafico = Grafico(dias=curDays,
+            val grafico = Grafico(
+                dias = curDays,
                 // de los registros que hemos actualizado, obtenemos los valores Y de cada variable
                 valsYVar1 = getYsEA(registros), // Estado Animo
                 valsYVar2 = getYsHS(registros), // Horas Sueño
@@ -92,25 +84,26 @@ class VisualizacionFragment : Fragment(){
                 colorFillVar2 = resources.getColor(R.color.horas_son_color_fill),
                 colorFillVar3 = resources.getColor(R.color.horas_act_color_fill)
             )
-            with(grafico){
+            with(grafico) {
                 createXAxis()
 
                 val var1procesados = CreateLineDataSetVar1()
-                Log.i(TAG,"Puntos procesados $var1procesados para var1 : Estado Animo")
+                Log.i(TAG, "Puntos procesados $var1procesados para var1 : Estado Animo")
 
                 val var2procesados = CreateLineDataSetVar2()
-                Log.i(TAG,"Puntos procesados $var2procesados para var2 : Horas son")
+                Log.i(TAG, "Puntos procesados $var2procesados para var2 : Horas son")
 
                 val var3procesados = CreateLineDataSetVar3()
-                Log.i(TAG,"Puntos procesados $var3procesados para var3 : Horas actividades")
+                Log.i(TAG, "Puntos procesados $var3procesados para var3 : Horas actividades")
 
-                val ax = mergeDataSets( (binding.cbEstadoAnimo.isChecked && (var1procesados > 0)),
+                val ax = mergeDataSets(
+                    (binding.cbEstadoAnimo.isChecked && (var1procesados > 0)),
                     (binding.cbHorasSon.isChecked && (var2procesados > 0)),
                     (binding.cbActividades.isChecked && (var3procesados > 0))
                 )
                 // Si no hemos recuperado puntos de ninguna de las 3 variables, no pedimos el LineData porque será null
 //                if(var1procesados > 0 || var2procesados > 0 || var2procesados > 0) lineChart.data = getLineData()
-                if(ax > 0) lineChart.data = getLineData()
+                if (ax > 0) lineChart.data = getLineData()
 
             }
 
@@ -135,25 +128,26 @@ class VisualizacionFragment : Fragment(){
         // listeners de los botones
         binding.btnOne.setOnClickListener {
             // el isActivated es necesario para el calculo de los días
+            curDays = 7
+            viewModel.actualizaRegs(curDays)
             binding.btnOne.isActivated = true
             binding.btnTwo.isActivated = false
             binding.btnThree.isActivated = false
-            curDays = 7
-            viewModel.actualizaRegs(curDays, correo)
+
         }
         binding.btnTwo.setOnClickListener {
             binding.btnOne.isActivated = false
             binding.btnTwo.isActivated = true
             binding.btnThree.isActivated = false
             curDays = 14
-            viewModel.actualizaRegs(curDays, correo)
+            viewModel.actualizaRegs(curDays)
         }
         binding.btnThree.setOnClickListener {
             binding.btnOne.isActivated = false
             binding.btnTwo.isActivated = false
             binding.btnThree.isActivated = true
             curDays = 30
-            viewModel.actualizaRegs(curDays, correo)
+            viewModel.actualizaRegs(curDays)
         }
         /**
          * <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
@@ -165,7 +159,7 @@ class VisualizacionFragment : Fragment(){
      */
     private fun getYsHA(regs: ArrayList<Registro>): ArrayList<Float> {
         val ret = ArrayList<Float>()
-        for (r in regs){
+        for (r in regs) {
             ret.add(r.horasAct.toFloat())
         }
         return ret
@@ -173,7 +167,7 @@ class VisualizacionFragment : Fragment(){
 
     private fun getYsHS(regs: ArrayList<Registro>): ArrayList<Float> {
         val ret = ArrayList<Float>()
-        for (r in regs){
+        for (r in regs) {
             ret.add(r.horasSon.toFloat())
         }
         return ret
@@ -181,7 +175,7 @@ class VisualizacionFragment : Fragment(){
 
     private fun getYsEA(regs: ArrayList<Registro>): ArrayList<Float> {
         val ret = ArrayList<Float>()
-        for (r in regs){
+        for (r in regs) {
             ret.add(r.estAnim.toFloat())
         }
         return ret
@@ -201,9 +195,8 @@ class VisualizacionFragment : Fragment(){
         // 5 Setup del LineChart
         lineChart.data = data
         lineChart.setBackgroundColor(resources.getColor(R.color.white))
-        lineChart.animateXY(3000,3000)
+        lineChart.animateXY(3000, 3000)
     }
-
 
 
 }
