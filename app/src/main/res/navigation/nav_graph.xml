@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/homeFragment">
+
+    <fragment
+        android:id="@+id/homeFragment"
+        android:name="raimon.example.moodnitoringapp.ui.home.HomeFragment"
+        android:label="fragment_home"
+        tools:layout="@layout/fragment_home" >
+        <action
+            android:id="@+id/action_homeFragment_to_registroFragment"
+            app:destination="@id/nav_registroFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_visualizacionFragment"
+            app:destination="@id/nav_visualizacionFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_recaidaFragment"
+            app:destination="@id/nav_recaidaFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_actuacionFragment"
+            app:destination="@id/nav_actuacionFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/nav_registroFragment"
+        android:name="raimon.example.moodnitoringapp.ui.registroDatos.RegistroFragment"
+        android:label="fragment_registro"
+        tools:layout="@layout/fragment_registro" />
+    <fragment
+        android:id="@+id/nav_recaidaFragment"
+        android:name="raimon.example.moodnitoringapp.ui.recaida.RecaidaFragment"
+        android:label="fragment_recaida"
+        tools:layout="@layout/fragment_recaida" />
+    <fragment
+        android:id="@+id/nav_actuacionFragment"
+        android:name="raimon.example.moodnitoringapp.ui.actuacion.ActuacionFragment"
+        android:label="fragment_actuacion"
+        tools:layout="@layout/fragment_actuacion" />
+    <fragment
+        android:id="@+id/nav_visualizacionFragment"
+        android:name="raimon.example.moodnitoringapp.ui.visualizacion.VisualizacionFragment"
+        android:label="VisualizacionFragment" />
+    <!--    <fragment-->
+<!--        android:id="@+id/nav_visualizacionFragment"-->
+<!--        android:name="raimon.example.moodnitoringapp.ui.visualizacion.VisualizacionFragment"-->
+<!--        android:label="fragment_visualizacion"-->
+<!--        tools:layout="@layout/fragment_visualizacion" />-->
+</navigation>

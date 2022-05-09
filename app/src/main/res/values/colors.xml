@@ -7,4 +7,23 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+
+<!-- LineChartsColors-->
+    <color name="estado_animo_color_line">#0A7737</color>
+    <color name="estado_animo_color_fill">#14DD67</color>
+    <color name="horas_son_color_line">#C51162</color>
+    <color name="horas_son_color_fill">#FF167F</color>
+    <color name="horas_act_color_line">#F7FF00</color>
+    <color name="horas_act_color_fill">#EAED79</color>
+
+
+    <!--Paletas de colores app -->
+    <color name="primaryColor">#e0e0e0</color>
+    <color name="primaryLightColor">#ffffff</color>
+    <color name="primaryDarkColor">#aeaeae</color>
+    <color name="secondaryColor">#039be5</color>
+    <color name="secondaryLightColor">#63ccff</color>
+    <color name="secondaryDarkColor">#006db3</color>
+    <color name="primaryTextColor">#000000</color>
+    <color name="secondaryTextColor">#000000</color>
 </resources>
