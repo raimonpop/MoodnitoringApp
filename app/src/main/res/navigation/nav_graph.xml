@@ -37,11 +37,20 @@
         android:id="@+id/nav_actuacionFragment"
         android:name="raimon.example.moodnitoringapp.ui.actuacion.ActuacionFragment"
         android:label="fragment_actuacion"
-        tools:layout="@layout/fragment_actuacion" />
+        tools:layout="@layout/fragment_actuacion" >
+        <action
+            android:id="@+id/action_nav_actuacionFragment_to_actuacionDetailsFragment"
+            app:destination="@id/nav_actuacionDetailsFragment"/>
+    </fragment>
     <fragment
         android:id="@+id/nav_visualizacionFragment"
         android:name="raimon.example.moodnitoringapp.ui.visualizacion.VisualizacionFragment"
         android:label="VisualizacionFragment" />
+    <fragment
+        android:id="@+id/nav_actuacionDetailsFragment"
+        android:name="raimon.example.moodnitoringapp.ui.actuacion.details.ActuacionDetailsFragment"
+        android:label="fragment_actuacion_details"
+        tools:layout="@layout/fragment_actuacion_details" />
     <!--    <fragment-->
 <!--        android:id="@+id/nav_visualizacionFragment"-->
 <!--        android:name="raimon.example.moodnitoringapp.ui.visualizacion.VisualizacionFragment"-->

@@ -3,6 +3,8 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/raimo/StudioProjects/MoodnitoringApp/app/src/main/res/layout/fragment_actuacion_details.xml" value="0.22" />
+        <entry key="..\:/Users/raimo/StudioProjects/MoodnitoringApp/app/src/main/res/layout/item_card_recommendations.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/ic_timeline.xml" value="0.1" />
         <entry key="app/src/main/res/layout/item_card_recommendations.xml" value="0.1" />
       </map>
