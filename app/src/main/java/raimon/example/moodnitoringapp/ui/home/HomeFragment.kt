@@ -7,11 +7,12 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
+import com.google.firebase.auth.FirebaseAuth
 import raimon.example.moodnitoringapp.R
 import raimon.example.moodnitoringapp.databinding.FragmentHomeBinding
 
 class HomeFragment : Fragment() {
-
+private val firebase = FirebaseAuth.getInstance()
     // ViewBinding
     private var _binding: FragmentHomeBinding? = null
     // This property is only valid between onCreateView and
@@ -35,6 +36,7 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        binding.tvSaludo.text = "Buenas, "+firebase.currentUser?.displayName
         // NavController
         navController = Navigation.findNavController(view) // Instancia el navController.
 

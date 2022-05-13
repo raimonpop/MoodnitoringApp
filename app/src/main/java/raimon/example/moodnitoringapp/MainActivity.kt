@@ -8,8 +8,12 @@ import com.firebase.ui.auth.AuthUI
 import com.firebase.ui.auth.ErrorCodes
 import com.firebase.ui.auth.IdpResponse
 import com.google.firebase.auth.FirebaseAuth
+import raimon.example.moodnitoringapp.databinding.ActivityMainBinding
+import raimon.example.moodnitoringapp.databinding.FragmentActuacionDetailsBinding
 
 class MainActivity : AppCompatActivity() {
+
+    private lateinit var binding: ActivityMainBinding
     private lateinit var firebaseAuth: FirebaseAuth
 
     private lateinit var authStateListener: FirebaseAuth.AuthStateListener
@@ -42,7 +46,8 @@ class MainActivity : AppCompatActivity() {
     }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
         configureAuth()
     }
@@ -52,7 +57,8 @@ class MainActivity : AppCompatActivity() {
         firebaseAuth = FirebaseAuth.getInstance()
         authStateListener = FirebaseAuth.AuthStateListener { auth ->
             if (auth.currentUser != null){
-                supportActionBar?.title = auth.currentUser?.displayName
+                supportActionBar?.hide()
+                //supportActionBar?.title = auth.currentUser?.displayName
             }else{
                 val provider = arrayListOf(
                     AuthUI.IdpConfig.EmailBuilder().build(),
