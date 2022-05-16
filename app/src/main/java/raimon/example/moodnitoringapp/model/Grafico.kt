@@ -72,7 +72,7 @@ data class Grafico (
      */
     // Crea el Eje Y + LineDataSet
     fun CreateLineDataSetVar1(): Int{
-        var ret: Int = 0
+        var ret: Int
         if (valsYVar1.size < 1){
             ret = -1
         }else {
@@ -100,7 +100,7 @@ data class Grafico (
      */
     // Crea el Eje Y + LineDataSet
     fun CreateLineDataSetVar2(): Int{
-        var ret: Int = 0
+        var ret: Int
         if (valsYVar2.size < 1){
             ret = -1
         }else {
@@ -130,7 +130,7 @@ data class Grafico (
      */
     // Crea el Eje Y + LineDataSet
     fun CreateLineDataSetVar3(): Int{
-        var ret: Int = 0
+        var ret: Int
         if (valsYVar3.size < 1){
             ret = -1
         }else{

@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import android.widget.SeekBar
 import android.widget.SeekBar.OnSeekBarChangeListener
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
@@ -49,7 +50,7 @@ class RegistroFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
+        setupActionBar()
         //region LIVE DATA
         /**
          * >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
@@ -314,7 +315,13 @@ class RegistroFragment : Fragment() {
         }
         //endregion
     }
-
+    private fun setupActionBar() {
+        (activity as? AppCompatActivity)?.let {
+            it.supportActionBar?.setDisplayHomeAsUpEnabled(true)
+            it.supportActionBar?.title = "Registrar datos"
+            //setHasOptionsMenu(true)
+        }
+    }
 
     override fun onDestroyView() {
         super.onDestroyView()

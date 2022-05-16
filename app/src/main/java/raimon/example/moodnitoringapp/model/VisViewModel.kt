@@ -31,14 +31,8 @@ class VisViewModel : ViewModel() {
     val registros = MutableLiveData<ArrayList<Registro>>()
 
     fun actualizaRegs(dias: Int) {
-        regs = ArrayList<Registro>()
-//        doAsync {
+        regs = ArrayList()
         getRegisters(dias)
-//            uiThread {
-//                Log.i(TAG, "Posteo los registros para el observer")
-        registros.postValue(regs)
-//            }
-//        }
     }
 
     /**
@@ -46,26 +40,16 @@ class VisViewModel : ViewModel() {
      */
     fun getRegisters(dias: Int) {
         Log.d(TAG, "Numero de dias $dias")
-        // Calculo de fecha ini + final
-        val fechaFin = Timestamp.now().toDate()
-        //val fechaIni = fechaFin.time. //dias.toLong()// "2022.01.01"
-        //val control1 = fechaFin.time.days
-        //val control2 = fechaIni
-        //Log.i(TAG, "getRegisters desde $fechaIni hasta $fechaFin")
 
-        // Reference collection
         val ref = FirebaseFirestore.getInstance().collection("Registros")
         // Query
         ref
-//            .whereEqualTo("usuario","pepe@test.com")
             .whereEqualTo("usuario", auth.currentUser?.uid.toString())
-            /*.whereGreaterThanOrEqualTo("fecha", Timestamp.now()/*fechaIni*/)
-            .whereLessThanOrEqualTo("fecha", Timestamp.now())*/
             .orderBy("fecha", Query.Direction.DESCENDING).limit(dias.toLong())
             .get().addOnSuccessListener { docs ->
                 Log.d(TAG, "Recuperados: ${docs.size()} documentos. en vista")
                 var listRegs = docs.toObjects(Registro::class.java)
-                listRegs.forEach { docs -> regs.add(docs) }
+                listRegs.forEach { doc -> regs.add(doc) }
                 Log.d(TAG, "Devolviendo ${regs.size} de Firebase en vista")
                 registros.postValue(regs)
             }.addOnFailureListener {

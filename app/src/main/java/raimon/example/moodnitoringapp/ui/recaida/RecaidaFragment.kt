@@ -5,12 +5,16 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import raimon.example.moodnitoringapp.Constants
 import raimon.example.moodnitoringapp.R
 import raimon.example.moodnitoringapp.databinding.FragmentRecaidaBinding
+import raimon.example.moodnitoringapp.model.Actuacion
+import raimon.example.moodnitoringapp.model.ActuacionData
 import raimon.example.moodnitoringapp.model.Notes
 import raimon.example.moodnitoringapp.ui.recaida.database.DatabaseHelper
+import kotlin.random.Random
 
 
 class RecaidaFragment : Fragment() {
@@ -37,13 +41,16 @@ class RecaidaFragment : Fragment() {
         database = DatabaseHelper(this.requireContext())
     }
 
+
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setupRecyclerViewHipo()
         setupRecyclerViewDepre()
         setupBottonHipo()
         setupBottonDepre()
-
+        setupActionBar()
+        setupCard()
     }
 
     override fun onStart() {
@@ -52,7 +59,28 @@ class RecaidaFragment : Fragment() {
     }
 
 
-     fun getData() {
+    private fun setupActionBar() {
+        (activity as? AppCompatActivity)?.let {
+            it.supportActionBar?.setDisplayHomeAsUpEnabled(true)
+            it.supportActionBar?.title = "Mis señales"
+            setHasOptionsMenu(false)
+        }
+    }
+
+    private fun setupCard(){
+        var numero = (0..ActuacionData.actuacionDatos.size - 1).random()
+           inserData(ActuacionData.actuacionDatos[numero])
+    }
+
+    private fun inserData(it: Actuacion) {
+        binding?.let { binding->
+            binding.tvTitle.text = it.title
+            binding.tvDescription.text = it.description
+        }
+
+    }
+
+    private fun getData() {
         val data = database.getAllNotes()
         data.forEach { note ->
             addNoteAuto(note)

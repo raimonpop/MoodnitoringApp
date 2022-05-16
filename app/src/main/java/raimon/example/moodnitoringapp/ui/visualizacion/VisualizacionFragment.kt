@@ -5,6 +5,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
@@ -40,7 +41,6 @@ class VisualizacionFragment : Fragment() {
     // Dias
     private var curDays: Int = 0
 
-    private val auth = FirebaseAuth.getInstance()
 
 
     override fun onCreateView(
@@ -59,7 +59,7 @@ class VisualizacionFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
+        setupActionBar()
 
         /**
          * >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
@@ -85,6 +85,7 @@ class VisualizacionFragment : Fragment() {
                 colorFillVar3 = resources.getColor(R.color.horas_act_color_fill)
             )
             with(grafico) {
+
                 createXAxis()
 
                 val var1procesados = CreateLineDataSetVar1()
@@ -103,7 +104,13 @@ class VisualizacionFragment : Fragment() {
                 )
                 // Si no hemos recuperado puntos de ninguna de las 3 variables, no pedimos el LineData porque será null
 //                if(var1procesados > 0 || var2procesados > 0 || var2procesados > 0) lineChart.data = getLineData()
-                if (ax > 0) lineChart.data = getLineData()
+                if (ax > 0) {
+                    lineChart.data = getLineData()
+                    // Quito la imagen de fondo si ha ido bien
+                    binding.ivBackground.visibility = View.GONE
+                    // No espera por el click...
+                    lineChart.invalidate()
+                }
 
             }
 
@@ -149,6 +156,24 @@ class VisualizacionFragment : Fragment() {
             curDays = 30
             viewModel.actualizaRegs(curDays)
         }
+
+        // listeners de los checkboxes
+        binding.cbActividades.setOnCheckedChangeListener { _, _ ->
+            Log.i(TAG, "cbActividades cambiado.. con $curDays dias.")
+            viewModel.actualizaRegs(curDays)
+        }
+
+        binding.cbEstadoAnimo.setOnCheckedChangeListener { _, _ ->
+            Log.i(TAG, "cbEstadoAnimo cambiado.. con $curDays dias.")
+            viewModel.actualizaRegs(curDays)
+        }
+
+        binding.cbHorasSon.setOnCheckedChangeListener { _, _ ->
+            Log.i(TAG, "cbHorasSon cambiado.. con $curDays dias.")
+            viewModel.actualizaRegs(curDays)
+        }
+
+        //endregion
         /**
          * <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
          */
@@ -187,15 +212,12 @@ class VisualizacionFragment : Fragment() {
         _binding = null
     }
 
-    /**
-     * Custom
-     */
-
-    private fun updateChart(data: LineData) {
-        // 5 Setup del LineChart
-        lineChart.data = data
-        lineChart.setBackgroundColor(resources.getColor(R.color.white))
-        lineChart.animateXY(3000, 3000)
+    private fun setupActionBar() {
+        (activity as? AppCompatActivity)?.let {
+            it.supportActionBar?.setDisplayHomeAsUpEnabled(true)
+            it.supportActionBar?.title = "Vista datos"
+            //setHasOptionsMenu(true)
+        }
     }
 
 

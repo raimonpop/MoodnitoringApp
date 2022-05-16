@@ -5,97 +5,82 @@
     android:id="@+id/frameLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.registroDatos.view.RegistroFragment">
+    tools:context=".ui.registroDatos.RegistroFragment">
 
 
-    <!--
-    **************** GUIDELINES (VERT) ****************
-    -->
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/glLeft"
-        android:layout_width="wrap_content"
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.3" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/btDate"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="20dp"
+        app:cardCornerRadius="15dp">
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/glRight"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.7" />
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideline"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintGuide_percent="0.2" />
 
-    <!--
-    **************** HEADER ****************
-    -->
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="centerCrop"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/rectangle_1" />
 
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/glHeader2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.2" />
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/guideline"
+                android:background="@color/secondaryColor">
+                <TextView
+                    android:id="@+id/tvTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Crear un nuevo registro"
+                    android:textColor="@color/white"
+                    android:layout_marginStart="10dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"/>
+                <TextView
+                    android:id="@+id/tvDescription"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:text="Para poder crear un nuevo registro de datos unicamente tiene que seleccionar las horas de sueño y el estado de animo, a continuacion tiene que seleccionar las horas de las distintas actividades que ha tenido."
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tvTitle"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    android:textColor="@color/white"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginEnd="10dp"
+                    android:maxLines="4"/>
 
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/glHeader"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.3" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_margin="10dp"
-        android:src="@drawable/logo"
-        app:layout_constraintBottom_toTopOf="@+id/glHeader2"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    </androidx.cardview.widget.CardView>
 
-    <!-- Formato fecha YYYY/MM/DD -->
     <Button
         android:id="@+id/btDate"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_margin="10dp"
+        android:layout_marginBottom="16dp"
         android:text="YYYY/MM/DD"
-        app:layout_constraintBottom_toTopOf="@+id/glHeader"
-        app:layout_constraintEnd_toEndOf="@+id/glRight"
-        app:layout_constraintStart_toStartOf="@+id/glLeft"
-        app:layout_constraintTop_toTopOf="@+id/glHeader2" />
+        app:layout_constraintBottom_toTopOf="@id/tvEstadoAnimo"
+        app:layout_constraintEnd_toEndOf="@+id/sbEstadoAnimo"
+        app:layout_constraintStart_toStartOf="@+id/sbEstadoAnimo"
+         />
 
-    <!--
-    **************** BODY ****************
-    -->
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/glBodyTop"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.45" />
-
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/glBodyMid"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.6" />
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/glBodyBottom"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.75" />
-
-    <!--
-        Part I. Estado de ánimo
-     -->
     <TextView
         android:id="@+id/tvEstadoAnimo"
         android:layout_width="0dp"
@@ -105,10 +90,9 @@
         android:background="#039BE5"
         android:text="Estado de animo"
         android:textAlignment="center"
-        app:layout_constraintBottom_toTopOf="@+id/sbEstadoAnimo"
-        app:layout_constraintEnd_toEndOf="@+id/glRight"
-        app:layout_constraintStart_toStartOf="@+id/glLeft"
-        app:layout_constraintTop_toBottomOf="@+id/glHeader"
+        app:layout_constraintBottom_toTopOf="@+id/tvCurEstadoAnimo"
+        app:layout_constraintEnd_toEndOf="@+id/tvHorasSon"
+        app:layout_constraintStart_toStartOf="@+id/tvHorasSon"
         app:layout_constraintVertical_chainStyle="spread" />
 
     <SeekBar
@@ -118,11 +102,10 @@
         android:max="10"
         android:min="0"
         android:progress="5"
-        app:layout_constraintBottom_toTopOf="@+id/glBodyTop"
-        app:layout_constraintEnd_toEndOf="@+id/glRight"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/glLeft"
-        app:layout_constraintTop_toBottomOf="@+id/tvEstadoAnimo" />
+        app:layout_constraintBottom_toTopOf="@+id/tvHorasSon"
+        app:layout_constraintEnd_toEndOf="@+id/sbHorasSon"
+        android:layout_marginBottom="16dp"
+        app:layout_constraintStart_toStartOf="@+id/sbHorasSon"/>
 
     <TextView
         android:layout_width="wrap_content"
@@ -155,23 +138,20 @@
         app:layout_constraintStart_toStartOf="@+id/sbEstadoAnimo"
         app:layout_constraintEnd_toEndOf="@+id/sbEstadoAnimo"
         />
-    <!--
-        Part II. Horas de sueño
-     -->
+
 
     <TextView
         android:id="@+id/tvHorasSon"
         android:layout_width="0dp"
         android:layout_height="20dp"
         android:layout_margin="10dp"
-        android:layout_marginBottom="2dp"
+        android:layout_marginBottom="16dp"
         android:background="#039BE5"
         android:text="Horas de sueño"
         android:textAlignment="center"
-        app:layout_constraintBottom_toTopOf="@+id/sbHorasSon"
-        app:layout_constraintEnd_toEndOf="@+id/glRight"
-        app:layout_constraintStart_toStartOf="@+id/glLeft"
-        app:layout_constraintTop_toBottomOf="@+id/glBodyTop"
+        app:layout_constraintBottom_toTopOf="@+id/tvCurHorasSon"
+        app:layout_constraintStart_toStartOf="@id/sbHorasSon"
+        app:layout_constraintEnd_toEndOf="@id/sbHorasSon"
         app:layout_constraintVertical_chainStyle="spread" />
 
     <SeekBar
@@ -181,11 +161,12 @@
         android:max="24"
         android:min="0"
         android:progress="8"
-        app:layout_constraintBottom_toTopOf="@+id/glBodyMid"
-        app:layout_constraintEnd_toEndOf="@+id/glRight"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/glLeft"
-        app:layout_constraintTop_toBottomOf="@+id/tvHorasSon" />
+        app:layout_constraintBottom_toTopOf="@id/tvTitleActiv"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginBottom="24dp"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginStart="128dp"
+        android:layout_marginEnd="128dp"/>
 
     <TextView
         android:layout_width="wrap_content"
@@ -219,18 +200,16 @@
         app:layout_constraintEnd_toEndOf="@+id/sbHorasSon"
         />
 
-    <!--
-        Part III. Checkboxes Actividades
-     -->
+
 
     <TextView
-        android:id="@+id/tvTitle"
+        android:id="@+id/tvTitleActiv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Actividades"
-        android:textSize="20dp"
-        android:textStyle="bold"
-        app:layout_constraintTop_toBottomOf="@+id/glBodyMid"
+        android:textAppearance="?attr/textAppearanceHeadline6"
+        android:layout_marginBottom="24dp"
+        app:layout_constraintBottom_toTopOf="@id/cbFisicas"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
 
@@ -240,13 +219,13 @@
         android:id="@+id/cbFisicas"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_margin="10dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginBottom="10dp"
         android:text="Físicas/Deportivas"
         app:layout_constraintBottom_toTopOf="@+id/cbIntelectual"
         app:layout_constraintEnd_toStartOf="@+id/sbFisicas"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvTitle" />
+        app:layout_constraintStart_toStartOf="parent"/>
 
     <SeekBar
         android:id="@+id/sbFisicas"
@@ -299,13 +278,14 @@
         android:id="@+id/cbIntelectual"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_margin="10dp"
+        android:layout_marginBottom="10dp"
+        android:layout_marginStart="10dp"
         android:text="Artístico/Intelectual"
         app:layout_constraintBottom_toTopOf="@+id/cbSocial"
         app:layout_constraintEnd_toStartOf="@+id/sbIntelectual"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/cbFisicas" />
+         />
 
     <SeekBar
         android:id="@+id/sbIntelectual"
@@ -317,7 +297,6 @@
         android:progress="3"
         app:layout_constraintBottom_toBottomOf="@+id/cbIntelectual"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.4"
         app:layout_constraintStart_toEndOf="@+id/cbIntelectual"
         app:layout_constraintTop_toTopOf="@+id/cbIntelectual" />
 
@@ -358,25 +337,24 @@
         android:id="@+id/cbSocial"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_margin="10dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginBottom="24dp"
         android:text="Sociales"
-        app:layout_constraintBottom_toTopOf="@+id/glFooter"
+        app:layout_constraintBottom_toTopOf="@+id/btSave"
         app:layout_constraintEnd_toStartOf="@+id/sbSocial"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/cbIntelectual" />
+        app:layout_constraintStart_toStartOf="parent"/>
 
     <SeekBar
         android:id="@+id/sbSocial"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_margin="10dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginStart="10dp"
         android:max="24"
         android:min="0"
         android:progress="3"
         app:layout_constraintBottom_toBottomOf="@+id/cbSocial"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.4"
         app:layout_constraintStart_toEndOf="@+id/cbSocial"
         app:layout_constraintTop_toTopOf="@+id/cbSocial" />
     <TextView
@@ -411,44 +389,15 @@
         app:layout_constraintEnd_toEndOf="@+id/sbSocial"
         />
 
-    <!--
-    **************** FOOTER ****************
-    -->
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/glFooter"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.9" />
-
     <ImageButton
         android:id="@+id/btSave"
         android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:layout_height="wrap_content"
         android:layout_margin="10dp"
         android:src="@drawable/ic_baseline_save_24"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/btCancel"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/glFooter" />
-
-    <ImageButton
-        android:id="@+id/btCancel"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_margin="10dp"
-        android:src="@drawable/ic_baseline_cancel_24"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/btSave"
-        app:layout_constraintTop_toTopOf="@+id/glFooter" />
+        app:layout_constraintStart_toStartOf="parent"/>
 
-
-    <!--
-    **************** TO-DO ****************
-    -->
 
 </androidx.constraintlayout.widget.ConstraintLayout>
