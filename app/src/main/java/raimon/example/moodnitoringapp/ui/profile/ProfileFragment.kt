@@ -208,5 +208,9 @@ class ProfileFragment : Fragment() {
             //setHasOptionsMenu(true)
         }
     }
+    override fun onDestroyView() {
+        super.onDestroyView()
+        binding = null
+    }
 
 }

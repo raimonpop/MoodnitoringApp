@@ -87,6 +87,9 @@ class ActuacionFragment : Fragment(), iActuacion{
             adapter.add(it)
         }
     }
-
+    override fun onDestroyView() {
+        super.onDestroyView()
+        binding = null
+    }
 
 }

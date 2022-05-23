@@ -10,6 +10,8 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
+import androidx.navigation.findNavController
+import androidx.navigation.fragment.NavHostFragment.Companion.findNavController
 import com.firebase.ui.auth.AuthUI
 import com.google.firebase.auth.FirebaseAuth
 import raimon.example.moodnitoringapp.R
@@ -98,7 +100,5 @@ private val firebase = FirebaseAuth.getInstance()
         _binding = null
     }
 
-    /**
-     * Out of LifeCycle
-     */
+
 }

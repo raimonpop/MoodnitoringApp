@@ -44,4 +44,8 @@ class ActuacionDetailsFragment(actuacionSelected: Actuacion) : BottomSheetDialog
             }
         }
     }
+    override fun onDestroyView() {
+        super.onDestroyView()
+        binding = null
+    }
 }
