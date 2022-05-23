@@ -8,7 +8,7 @@ import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import java.util.*
 
-class RegViewModel: ViewModel() {
+class RegViewModel : ViewModel() {
 
     private val TAG = "Log:RegViewModel"
 
@@ -40,12 +40,14 @@ class RegViewModel: ViewModel() {
     fun updateHAF(cur: Int) {
         curHorasActFis.postValue(cur)
     }
+
     // Artisticas
     val curHorasActArt = MutableLiveData<Int>()
 
     fun updateHAA(cur: Int) {
         curHorasActArt.postValue(cur)
     }
+
     // Sociales
     val curHorasActSoc = MutableLiveData<Int>()
 
@@ -54,22 +56,16 @@ class RegViewModel: ViewModel() {
     }
     //endregion
 
-    fun insertReg(reg: Registro){
+    fun insertReg(reg: Registro) {
         Log.i(TAG, "Insertando ${reg}..")
-
-        val auth = FirebaseAuth.getInstance()
-
         // generate random ID for document
-        val id = auth.currentUser?.uid.let {
-            db.collection("Registros").document(it.toString())
-                .set(reg)
-                .addOnSuccessListener {
-                    Log.i(TAG, "Registro $reg añadido correctamente")
-                }
-                .addOnFailureListener { ex ->
-                    Log.i(TAG, "Error: ${ex.message}")
-                }
+        db.collection("Registros").document()
+            .set(reg)
+            .addOnSuccessListener {
+                Log.i(TAG, "Registro $reg añadido correctamente")
             }
-
-        }
+            .addOnFailureListener { ex ->
+                Log.i(TAG, "Error: ${ex.message}")
+            }
+    }
 }

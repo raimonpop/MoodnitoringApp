@@ -22,6 +22,9 @@
         <action
             android:id="@+id/action_homeFragment_to_actuacionFragment"
             app:destination="@id/nav_actuacionFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_profileFragment"
+            app:destination="@id/nav_profileFragment" />
     </fragment>
     <fragment
         android:id="@+id/nav_registroFragment"
@@ -37,11 +40,25 @@
         android:id="@+id/nav_actuacionFragment"
         android:name="raimon.example.moodnitoringapp.ui.actuacion.ActuacionFragment"
         android:label="fragment_actuacion"
-        tools:layout="@layout/fragment_actuacion" />
+        tools:layout="@layout/fragment_actuacion" >
+        <action
+            android:id="@+id/action_nav_actuacionFragment_to_actuacionDetailsFragment"
+            app:destination="@id/nav_actuacionDetailsFragment"/>
+    </fragment>
     <fragment
         android:id="@+id/nav_visualizacionFragment"
         android:name="raimon.example.moodnitoringapp.ui.visualizacion.VisualizacionFragment"
         android:label="VisualizacionFragment" />
+    <fragment
+        android:id="@+id/nav_actuacionDetailsFragment"
+        android:name="raimon.example.moodnitoringapp.ui.actuacion.details.ActuacionDetailsFragment"
+        android:label="fragment_actuacion_details"
+        tools:layout="@layout/fragment_actuacion_details" />
+    <fragment
+        android:id="@+id/nav_profileFragment"
+        android:name="raimon.example.moodnitoringapp.ui.profile.ProfileFragment"
+        android:label="fragment_profile"
+        tools:layout="@layout/fragment_profile" />
     <!--    <fragment-->
 <!--        android:id="@+id/nav_visualizacionFragment"-->
 <!--        android:name="raimon.example.moodnitoringapp.ui.visualizacion.VisualizacionFragment"-->
