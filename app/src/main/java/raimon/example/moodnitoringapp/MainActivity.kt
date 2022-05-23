@@ -27,32 +27,41 @@ class MainActivity : AppCompatActivity() {
     private lateinit var authStateListener: FirebaseAuth.AuthStateListener
 
 
-    private val resultLauncher= registerForActivityResult(ActivityResultContracts.StartActivityForResult()){
-        val response = IdpResponse.fromResultIntent(it.data)
+    private val resultLauncher =
+        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
+            val response = IdpResponse.fromResultIntent(it.data)
 
-        if(it.resultCode == RESULT_OK){
-            val user = FirebaseAuth.getInstance().currentUser
-            if(user != null){
-                Toast.makeText(this, "Bienvenido", Toast.LENGTH_SHORT).show()
-            }else {
-                if (response == null){
-                    Toast.makeText(this,"Hasta luego", Toast.LENGTH_SHORT).show()
-                    finish()
-                }else{
-                    response.error?.let {
-                        if(it.errorCode == ErrorCodes.NO_NETWORK){
-                            Toast.makeText(this,"No hay conexion a internet", Toast.LENGTH_SHORT).show()
-                        }else{
-                            Toast.makeText(this,"Codigo de eroor: ${it.errorCode}", Toast.LENGTH_SHORT).show()
+            if (it.resultCode == RESULT_OK) {
+                val user = FirebaseAuth.getInstance().currentUser
+                if (user != null) {
+                    Toast.makeText(this, "Bienvenido", Toast.LENGTH_SHORT).show()
+                } else {
+                    if (response == null) {
+                        Toast.makeText(this, "Hasta luego", Toast.LENGTH_SHORT).show()
+                        finish()
+                    } else {
+                        response.error?.let {
+                            if (it.errorCode == ErrorCodes.NO_NETWORK) {
+                                Toast.makeText(
+                                    this,
+                                    "No hay conexion a internet",
+                                    Toast.LENGTH_SHORT
+                                ).show()
+                            } else {
+                                Toast.makeText(
+                                    this,
+                                    "Codigo de eroor: ${it.errorCode}",
+                                    Toast.LENGTH_SHORT
+                                ).show()
+                            }
                         }
                     }
+
                 }
 
             }
-
-
         }
-    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
@@ -65,10 +74,10 @@ class MainActivity : AppCompatActivity() {
 
         firebaseAuth = FirebaseAuth.getInstance()
         authStateListener = FirebaseAuth.AuthStateListener { auth ->
-            if (auth.currentUser != null){
+            if (auth.currentUser != null) {
 
                 //supportActionBar?.title = auth.currentUser?.displayName
-            }else{
+            } else {
                 val provider = arrayListOf(
                     AuthUI.IdpConfig.EmailBuilder().build(),
                     //AuthUI.IdpConfig.GoogleBuilder().build(),
@@ -78,10 +87,11 @@ class MainActivity : AppCompatActivity() {
 
                 resultLauncher.launch(
                     AuthUI.getInstance()
-                    .createSignInIntentBuilder()
-                    .setIsSmartLockEnabled(false)
-                    .setAvailableProviders(provider)
-                    .build())
+                        .createSignInIntentBuilder()
+                        .setIsSmartLockEnabled(false)
+                        .setAvailableProviders(provider)
+                        .build()
+                )
 
 
             }
@@ -96,8 +106,8 @@ class MainActivity : AppCompatActivity() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
 
 
-        when(item.itemId){
-            R.id.action_sign_out ->{
+        when (item.itemId) {
+            R.id.action_sign_out -> {
                 AuthUI.getInstance().signOut(this)
                     .addOnSuccessListener {
                         Toast.makeText(this, "Sesion terminada.", Toast.LENGTH_SHORT).show()
@@ -110,7 +120,7 @@ class MainActivity : AppCompatActivity() {
                     }
 
             }
-            R.id.action_profile ->{
+            R.id.action_profile -> {
 
             }
 
